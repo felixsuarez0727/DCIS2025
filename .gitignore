@@ -1,0 +1,96 @@
+# Datasets (usually large files that shouldn't be in the repository)
+data/
+*.hdf5
+*.h5
+*.csv
+*.npz
+
+# Saved models
+*.h5
+*.pkl
+*.joblib
+*.model
+
+# Python files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+.installed.cfg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.env/
+.venv/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.vs/
+.spyderproject
+.spyproject
+.projectile
+.dir-locals.el
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Logs and cache
+*.log
+logs/
+.cache/
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+
+# Operating system
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Project-specific configuration
+.env
+local_settings.py
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib

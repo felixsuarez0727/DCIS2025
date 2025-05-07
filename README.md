@@ -15,8 +15,8 @@ This project implements an advanced radar signal classification system with a sp
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/radar_classification_enhanced.git
-   cd radar_classification_enhanced
+   git clone https://github.com/yourusername/radar_classification_enhanced_V2.git
+   cd radar_classification_enhanced_V2
    ```
 
 2. Create a virtual environment and install dependencies:

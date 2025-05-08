@@ -1,4 +1,4 @@
-# Enhanced Radar Signal Classification
+# Enhanced Radar Signal Classification V2
 
 This project implements an advanced radar signal classification system with a specific focus on resolving confusion between AM combined signals and PULSED Air-Ground-MTI signals.
 

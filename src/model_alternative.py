@@ -1,5 +1,6 @@
 import numpy as np
 import logging
+import joblib
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
@@ -170,7 +171,6 @@ class SimpleRadarSignalClassifier:
         Args:
             filepath (str): Path to save the model
         """
-        import joblib
         joblib.dump((self.model, self.scaler), filepath)
         self.logger.info(f"Model saved to {filepath}")
     
@@ -181,6 +181,5 @@ class SimpleRadarSignalClassifier:
         Args:
             filepath (str): Path to load the model from
         """
-        import joblib
         self.model, self.scaler = joblib.load(filepath)
         self.logger.info(f"Model loaded from {filepath}")

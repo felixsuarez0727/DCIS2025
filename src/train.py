@@ -491,10 +491,7 @@ class ModelTrainer:
             num_to_plot (int): Number of signals to plot.
             save_dir (str): Folder to save the signals. If None, uses results/plots/confused_signals.
         """
-        import matplotlib.pyplot as plt
-        import numpy as np
-        import os
-
+        
         # Get data and predictions
         X_test = self.data_loader.X_test
         y_test = self.data_loader.y_test_encoded

@@ -73,42 +73,50 @@ class DataLoader:
     
     def _process_signal(self, signal):
         """
-        Process a single signal with normalization, spectrogram, wavelet, and frequency features
+        Process a single signal with normalization, spectrogram, wavelet, and frequency features.
+        
         Args:
             signal (numpy.ndarray): Raw signal data
+        
         Returns:
-            numpy.ndarray: Feature vector (espectrograma + wavelet + frecuencia)
+            numpy.ndarray: Feature vector (spectrogram + wavelet + frequency)
         """
         # Ensure signal is a numpy array
         if np.isscalar(signal):
             signal = np.array([signal])
+        
         # Normalize signal
         signal = (signal - np.mean(signal)) / (np.std(signal) + 1e-8)
-        # Espectrograma
+        
+        # Spectrogram
         f, t, Sxx = scipy.signal.spectrogram(signal.squeeze(), nperseg=64, noverlap=32)
         Sxx = np.abs(Sxx)
         Sxx = (Sxx - np.mean(Sxx)) / (np.std(Sxx) + 1e-8)
         Sxx = Sxx[..., np.newaxis]  # (freq, time, 1)
-        # Wavelet features (usamos Daubechies 4, nivel 3)
+        
+        # Wavelet features (Daubechies 4, level 3)
         coeffs = pywt.wavedec(signal.squeeze(), 'db4', level=3)
         wavelet_feats = np.concatenate([c.flatten() for c in coeffs])
-        # Frecuencia: FFT y estadísticas
+        
+        # Frequency: FFT and statistics
         fft_vals = np.abs(np.fft.fft(signal.squeeze()))
-        fft_vals = fft_vals[:len(fft_vals)//2]  # Solo frecuencias positivas
+        fft_vals = fft_vals[:len(fft_vals) // 2]  # Only positive frequencies
         fft_stats = np.array([
             np.mean(fft_vals),
             np.std(fft_vals),
             np.max(fft_vals),
             np.median(fft_vals),
-            np.sum(fft_vals > 0.5 * np.max(fft_vals)),  # Número de picos altos
+            np.sum(fft_vals > 0.5 * np.max(fft_vals)),  # Number of high peaks
             np.sum(fft_vals),
         ])
-        # Concatenar todo en un solo vector de features
-        # Aplanar espectrograma
+        
+        # Concatenate everything into a single feature vector
+        # Flatten spectrogram
         spec_flat = Sxx.flatten()
         features = np.concatenate([spec_flat, wavelet_feats, fft_stats])
+        
         return features
-    
+
     def _load_from_hdf5(self, file_path):
         """
         Load data from an HDF5 file

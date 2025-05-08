@@ -2,12 +2,13 @@ import tensorflow as tf
 import numpy as np
 import logging
 from tensorflow import keras
-from tensorflow.keras import layers, regularizers, optimizers, callbacks
+from tensorflow.keras import layers, regularizers, optimizers, callbacks, Input, Sequential
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import (
     Input, Dense, Conv2D, BatchNormalization, 
     MaxPooling2D, Dropout, GlobalAveragePooling2D, AveragePooling2D
 )
+from sklearn.utils.class_weight import compute_class_weight
 
 class RadarSignalClassifier:
     def __init__(self, input_shape, num_classes, use_dropout=True, dropout_rate=0.5, 
@@ -36,8 +37,6 @@ class RadarSignalClassifier:
         self.model.summary(print_fn=self.logger.info)
     
     def _build_model(self):
-        from tensorflow.keras import Input, Sequential
-        from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
 
         model = Sequential()
         model.add(Input(shape=(self.input_shape[0],)))  # input_shape[0] porque ahora es 1D
@@ -61,7 +60,6 @@ class RadarSignalClassifier:
         return model
     
     def _compute_class_weights(self, y_train):
-        from sklearn.utils.class_weight import compute_class_weight
 
         class_weights = compute_class_weight(
             class_weight='balanced', 

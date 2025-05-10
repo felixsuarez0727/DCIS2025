@@ -1,6 +1,6 @@
 2025-05-06 18:14:20 - main - INFO - Radar Signal Classification
 2025-05-06 18:14:20 - main - INFO - ==================================================
-2025-05-06 18:14:20 - main - INFO - Training Dataset: /Users/jaimearevalo/Downloads/RadComOta2.45GHz.hdf5
+2025-05-06 18:14:20 - main - INFO - Training Dataset: /Users/felixsuarez/Downloads/RadComOta2.45GHz.hdf5
 2025-05-06 18:14:20 - main - INFO - Testing Dataset: Split from training
 2025-05-06 18:14:20 - main - INFO - Data Percentage: 1.0
 2025-05-06 18:14:20 - main - INFO - Samples Per Class: 20000
@@ -14,7 +14,7 @@
 2025-05-06 18:14:20 - main - INFO - ==================================================
 2025-05-06 18:14:20 - main - INFO - Initializing data loader...
 2025-05-06 18:14:20 - main - INFO - Loading and preprocessing data...
-2025-05-06 18:14:20 - src.data_loader - INFO - Loading data from /Users/jaimearevalo/Downloads/RadComOta2.45GHz.hdf5
+2025-05-06 18:14:20 - src.data_loader - INFO - Loading data from /Users/felixsuarez/Downloads/RadComOta2.45GHz.hdf5
 2025-05-06 18:14:28 - src.data_loader - INFO - Total keys in the HDF5 file: 567000
 2025-05-06 18:33:23 - src.data_loader - INFO - Class distribution: {np.str_('AM_combined'): np.int64(60000), np.str_('BPSK_SATCOM'): np.int64(20000), np.str_('FMCW_Radar Altimeter'): np.int64(20000), np.str_('PULSED_Air-Ground-MTI'): np.int64(20000), np.str_('PULSED_Airborne-detection'): np.int64(20000), np.str_('PULSED_Airborne-range'): np.int64(20000), np.str_('PULSED_Ground mapping'): np.int64(20000)}
 2025-05-06 18:33:24 - src.data_loader - INFO - Splitting data into train, validation and test sets

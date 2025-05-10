@@ -1,0 +1,40 @@
+{
+    "accuracy": 0.9698888888888889,
+    "recall": 0.9698888888888889,
+    "am_count": 9000,
+    "correctly_classified": 8729,
+    "incorrectly_classified": 271,
+    "classification_report": {
+        "AM_combined": {
+            "precision": 1.0,
+            "recall": 0.9698888888888889,
+            "f1-score": 0.9847143098877545,
+            "support": 9000.0
+        },
+        "BPSK_SATCOM": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 0.0
+        },
+        "PULSED_Air-Ground-MTI": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 0.0
+        },
+        "accuracy": 0.9698888888888889,
+        "macro avg": {
+            "precision": 0.3333333333333333,
+            "recall": 0.3232962962962963,
+            "f1-score": 0.3282381032959182,
+            "support": 9000.0
+        },
+        "weighted avg": {
+            "precision": 1.0,
+            "recall": 0.9698888888888889,
+            "f1-score": 0.9847143098877547,
+            "support": 9000.0
+        }
+    }
+}

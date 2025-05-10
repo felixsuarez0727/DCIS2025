@@ -1,15 +1,5 @@
 # Datasets (usually large files that shouldn't be in the repository)
-data/
-*.hdf5
-*.h5
-*.csv
-*.npz
 
-# Saved models
-*.h5
-*.pkl
-*.joblib
-*.model
 
 # Python files
 __pycache__/
@@ -65,8 +55,6 @@ wheels/
 *.ipynb
 
 # Logs and cache
-*.log
-logs/
 .cache/
 .hypothesis/
 .pytest_cache/

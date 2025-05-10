@@ -1,0 +1,20 @@
+{
+    "accuracy": 0.9813492063492063,
+    "recall": 0.9813492063492063,
+    "am_count": 7560,
+    "correctly_classified": 7419,
+    "incorrectly_classified": 141,
+    "mean_confidence_correct": 0.9764968969331572,
+    "mean_confidence_incorrect": 0.594966132652072,
+    "max_confidence_correct": 0.9998719194757594,
+    "max_confidence_incorrect": 0.9072567215342648,
+    "prediction_distribution": {
+        "AM_combined": 0.9813492063492063,
+        "BPSK_SATCOM": 0.004232804232804233,
+        "FMCW_Radar Altimeter": 0.001984126984126984,
+        "PULSED_Air-Ground-MTI": 0.011375661375661376,
+        "PULSED_Airborne-detection": 0.0005291005291005291,
+        "PULSED_Airborne-range": 0.00013227513227513228,
+        "PULSED_Ground mapping": 0.0003968253968253968
+    }
+}

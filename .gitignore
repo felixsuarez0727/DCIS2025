@@ -18,6 +18,7 @@ env/
 ENV/
 .env/
 .venv/
+venv_snr/
 
 # Distribution / packaging
 build/

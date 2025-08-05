@@ -2,6 +2,7 @@ import h5py
 import numpy as np
 import logging
 import os
+import ast
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 import scipy.signal
@@ -40,8 +41,65 @@ class DataLoader:
         self.class_names = None
         self.label_encoder = LabelEncoder()
         
+        # SNR-related attributes
+        self.snr_mapping = self._create_snr_mapping()
+        
         # Configure logging
         self.logger = logging.getLogger('src.data_loader')
+        
+    def _create_snr_mapping(self):
+        """
+        Create SNR mapping from index to dB values
+        Range: -20 to 18 dB in steps of 2
+        
+        Returns:
+            dict: Mapping from SNR index to dB value
+        """
+        snr_mapping = {}
+        for i in range(20):  # 0 to 19
+            snr_dB = -20 + (i % 20) * 2
+            snr_mapping[i] = snr_dB
+        return snr_mapping
+    
+    def _extract_snr_from_key(self, key):
+        """
+        Extract SNR from a key string that represents a tuple
+        
+        Args:
+            key (str): Key string like "('MODULATION', 'SIGNAL_TYPE', 'PARAM1', 'SNR_INDEX')"
+        
+        Returns:
+            int: SNR dB value or None if parsing fails
+        """
+        try:
+            # Parse the string as a tuple
+            key_tuple = ast.literal_eval(key)
+            
+            if len(key_tuple) >= 4:
+                snr_index_str = key_tuple[3]
+                # Convert string to integer
+                try:
+                    snr_index = int(snr_index_str)
+                    # Convert SNR index to dB value using cyclic mapping
+                    snr_dB = -20 + (snr_index % 20) * 2
+                    return snr_dB
+                except ValueError:
+                    return None
+            else:
+                return None
+        except (ValueError, SyntaxError, IndexError) as e:
+            return None
+    
+    def get_available_snr_levels(self):
+        """
+        Get list of available SNR levels in the dataset
+        
+        Returns:
+            list: Available SNR levels in dB
+        """
+        if not hasattr(self, '_available_snr_levels'):
+            self._available_snr_levels = sorted(set(self.snr_mapping.values()))
+        return self._available_snr_levels
         
     def _group_modulations(self, labels):
         """
@@ -251,3 +309,94 @@ class DataLoader:
             list: Class names
         """
         return self.class_names
+    
+    def load_data_by_snr(self, snr_level, max_samples_per_class=100):
+        """
+        Load data for a specific SNR level
+        
+        Args:
+            snr_level (int): SNR level in dB
+            max_samples_per_class (int): Maximum samples per class to load
+        
+        Returns:
+            tuple: (X, y) - Features and labels for the specified SNR level
+        """
+        self.logger.info(f"Loading data for SNR level: {snr_level} dB")
+        
+        try:
+            with h5py.File(self.train_dataset_path, 'r') as f:
+                # Get all keys
+                all_keys = list(f.keys())
+                
+                # Filter keys by SNR level
+                filtered_keys = []
+                for key in all_keys:
+                    key_snr = self._extract_snr_from_key(key)
+                    if key_snr == snr_level:
+                        filtered_keys.append(key)
+                
+                self.logger.info(f"Found {len(filtered_keys)} samples for SNR {snr_level} dB")
+                
+                if len(filtered_keys) == 0:
+                    self.logger.warning(f"No samples found for SNR level {snr_level} dB")
+                    return np.array([]), np.array([])
+                
+                # Group keys by signal type
+                class_map = {}
+                for k in filtered_keys:
+                    # Extract signal type from key
+                    if isinstance(k, tuple) or (isinstance(k, str) and ('(' in k)):
+                        # Convert string tuple to actual tuple if necessary
+                        if isinstance(k, str):
+                            try:
+                                k_tuple = ast.literal_eval(k)
+                            except:
+                                self.logger.warning(f"Could not parse key: {k}")
+                                continue
+                        else:
+                            k_tuple = k
+                        signal_type = f"{k_tuple[0]}_{k_tuple[1]}"
+                    else:
+                        signal_type = k
+                        
+                    if signal_type not in class_map:
+                        class_map[signal_type] = []
+                        
+                    class_map[signal_type].append(k)
+                
+                # Select samples per class
+                X_selected = []
+                y_selected = []
+                
+                for signal_type, key_list in class_map.items():
+                    # Select up to max_samples_per_class samples per class
+                    if len(key_list) > 0:
+                        # Use deterministic random selection
+                        np.random.seed(self.random_state)
+                        selected_keys = np.random.choice(
+                            key_list, 
+                            size=min(len(key_list), max_samples_per_class), 
+                            replace=False
+                        )
+                        
+                        for k in selected_keys:
+                            signal = f[k][()]
+                            processed_signal = self._process_signal(signal)
+                            X_selected.append(processed_signal)
+                            y_selected.append(signal_type)
+                
+                X = np.array(X_selected)
+                y = np.array(y_selected)
+                
+                # Group AM signals if requested
+                y = self._group_modulations(y)
+                
+                # Log class distribution
+                unique, counts = np.unique(y, return_counts=True)
+                self.logger.info(f"Class distribution for SNR {snr_level} dB: {dict(zip(unique, counts))}")
+                
+                return X, y
+                
+        except Exception as e:
+            self.logger.error(f"Error loading data for SNR {snr_level} dB: {str(e)}")
+            raise

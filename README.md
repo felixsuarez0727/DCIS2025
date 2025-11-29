@@ -2,6 +2,29 @@
 
 This project implements an advanced radar signal classification system with a specific focus on resolving confusion between AM combined signals and PULSED Air-Ground-MTI signals.
 
+## Table of Contents
+
+- [Key Features](#key-features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Command Line Arguments](#command-line-arguments)
+  - [Dataset Options](#dataset-options)
+  - [Model Options](#model-options)
+  - [Training Options](#training-options)
+  - [Feature Options](#feature-options)
+  - [Regularization Options](#regularization-options)
+- [Model Architecture](#model-architecture)
+  - [Dense Neural Network (TensorFlow)](#dense-neural-network-tensorflow)
+  - [Alternative Random Forest (scikit-learn)](#alternative-random-forest-scikit-learn)
+- [Interactive Model Architecture Visualization](#interactive-model-architecture-visualization)
+- [Advanced Data Splitting Strategy](#advanced-data-splitting-strategy)
+- [Feature Vector Construction](#feature-vector-construction)
+- [Results Visualization](#results-visualization)
+- [Performance Analysis](#performance-analysis)
+- [Example Usage Scenarios](#example-usage-scenarios)
+- [Future Work](#future-work)
+- [License](#license)
+
 ## Key Features
 
 - **Dense Neural Network architecture**: Specialized neural network with batch normalization and dropout for robust generalization

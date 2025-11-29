@@ -95,10 +95,10 @@ const ModelArchitecture = () => {
             </div>
             <div>
               <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Arquitectura del Modelo Neural
+                Neural Model Architecture
               </h1>
               <p className="text-gray-600 mt-1">
-                Red neuronal profunda para clasificación de señales
+                Deep neural network for signal classification
               </p>
             </div>
           </div>
@@ -110,7 +110,7 @@ const ModelArchitecture = () => {
             <Database className="w-6 h-6" />
             <div>
               <h3 className="font-semibold text-lg">Input Layer</h3>
-              <p className="text-sm text-gray-300">Vector de características (513 dimensiones)</p>
+              <p className="text-sm text-gray-300">Feature vector (513 dimensions)</p>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@ const ModelArchitecture = () => {
                     </div>
                     <div>
                       <h3 className={`font-semibold ${layer.textColor}`}>{layer.name}</h3>
-                      <p className="text-sm text-gray-600">Tipo: {layer.type}</p>
+                      <p className="text-sm text-gray-600">Type: {layer.type}</p>
                     </div>
                   </div>
                   
@@ -137,7 +137,7 @@ const ModelArchitecture = () => {
                   </div>
                   
                   <div className="col-span-2 text-center">
-                    <p className="text-sm text-gray-600">Parámetros</p>
+                    <p className="text-sm text-gray-600">Parameters</p>
                     <p className="font-semibold text-gray-800">{layer.params.toLocaleString()}</p>
                   </div>
                   
@@ -172,7 +172,7 @@ const ModelArchitecture = () => {
           <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Parámetros</p>
+                <p className="text-sm text-gray-600">Total Parameters</p>
                 <p className="text-2xl font-bold text-gray-800">{totalParams.toLocaleString()}</p>
                 <p className="text-xs text-gray-500">652.03 KB</p>
               </div>
@@ -185,7 +185,7 @@ const ModelArchitecture = () => {
           <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Entrenables</p>
+                <p className="text-sm text-gray-600">Trainable</p>
                 <p className="text-2xl font-bold text-emerald-600">{trainableParams.toLocaleString()}</p>
                 <p className="text-xs text-gray-500">649.03 KB</p>
               </div>
@@ -198,7 +198,7 @@ const ModelArchitecture = () => {
           <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">No Entrenables</p>
+                <p className="text-sm text-gray-600">Non-Trainable</p>
                 <p className="text-2xl font-bold text-orange-600">{nonTrainableParams.toLocaleString()}</p>
                 <p className="text-xs text-gray-500">3.00 KB</p>
               </div>
@@ -211,22 +211,22 @@ const ModelArchitecture = () => {
 
         {/* Model Summary */}
         <div className="mt-8 bg-white rounded-xl p-6 shadow-lg border border-gray-200">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Resumen del Modelo</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">Model Summary</h2>
           <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
-              <p className="text-sm text-gray-600">Arquitectura</p>
+              <p className="text-sm text-gray-600">Architecture</p>
               <p className="font-semibold text-gray-800">Sequential Neural Network</p>
             </div>
             <div className="space-y-2">
-              <p className="text-sm text-gray-600">Caso de Uso</p>
-              <p className="font-semibold text-gray-800">Clasificación de Señales de Telecomunicaciones</p>
+              <p className="text-sm text-gray-600">Use Case</p>
+              <p className="font-semibold text-gray-800">Telecommunications Signal Classification</p>
             </div>
             <div className="space-y-2">
-              <p className="text-sm text-gray-600">Clases de Salida</p>
-              <p className="font-semibold text-gray-800">7 tipos de señales</p>
+              <p className="text-sm text-gray-600">Output Classes</p>
+              <p className="font-semibold text-gray-800">7 signal types</p>
             </div>
             <div className="space-y-2">
-              <p className="text-sm text-gray-600">Función de Pérdida</p>
+              <p className="text-sm text-gray-600">Loss Function</p>
               <p className="font-semibold text-gray-800">Categorical Crossentropy</p>
             </div>
           </div>
